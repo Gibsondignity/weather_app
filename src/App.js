@@ -49,30 +49,39 @@ function App() {
 
       <container>
         <div className="top">
+          <div>{data.sys ? <p>Country: {data.sys.country}</p> : null}</div>
           <div className="location">
-            {data.name ? <p>{data.name}</p> : <p>{data.message}</p>}
+            {data.name ? <p>City: {data.name}</p> : <p>{data.message}</p>}
           </div>
           <div className="temp">
-            {data.main ? <h1>{data.main.temp}F</h1>: null}
+            {data.main ? <h3>{data.main.temp}°F</h3>: null}
           </div>
           <div className="description">
-            {data.weather ? <p>{data.weather[0].main}</p> : <p>No clouds</p>}
+            {data.weather ? <p>{data.weather[0].main}</p> : null}
+          </div>
+          <div>
+            {data.weather ? <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt="weather icon"/> : null}
+            {data.weather ? <p>{data.weather[0].description}</p> : null}
           </div>
         </div>
-        <div className="bottom">
-          <div className="feels">
-            <p className="bold">65F</p>
-            <p>Feels like</p>
-          </div>
-          <div className="humidity">
-            <p className="bold">20%</p>
-            <p>Humidity</p>
-          </div>
-          <div className="wind">
-            <p className="bold">12 MPH</p>
-            <p>Wind Speed</p>
-          </div>
-        </div>
+
+          {data.main &&
+            <div className="bottom">
+              <div className="feels">
+                <p className="bold">{data.main.feels_like}</p>
+                <p>Feels like</p>
+              </div>
+              <div className="humidity">
+                <p className="bold">{data.main.humidity}%</p>
+                <p>Humidity</p>
+              </div>
+              <div className="wind">
+                <p className="bold">{data.wind.speed}</p>
+                <p>Wind Speed</p>
+              </div>
+            </div>
+        }
+
       </container>
     </div>
   );
